@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../theme/app_theme.dart';
+import '../services/session_manager.dart';
+import '../services/security_service.dart';
 import 'home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -70,6 +72,11 @@ class _LoginScreenState extends State<LoginScreen>
 
     if (email == _demoEmail && password == _demoPassword) {
       if (!mounted) return;
+      
+      // Guardar token y activar timer de sesión
+      await SecurityService().saveToken("token_valido_farmafind_2024");
+      SessionManager().startListener();
+
       Navigator.of(context).pushReplacement(
         PageRouteBuilder(
           pageBuilder: (context, animation, secondaryAnimation) =>

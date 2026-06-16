@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../theme/app_theme.dart';
+import '../services/session_manager.dart';
 import 'login_screen.dart';
 
 /// Pantalla principal (dashboard) de FarmaFind tras login exitoso.
@@ -95,6 +96,7 @@ class HomeScreen extends StatelessWidget {
           // Botón cerrar sesión
           IconButton(
             onPressed: () {
+              SessionManager().stopListener();
               Navigator.of(context).pushReplacement(
                 MaterialPageRoute(
                     builder: (context) => const LoginScreen()),
